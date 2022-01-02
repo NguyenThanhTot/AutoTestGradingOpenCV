@@ -16,7 +16,7 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
 public class Plantain_StudentID {
-	private String pathImg;
+	private Mat matPathImg;
 	private int wBoxP = 150; // width của box mã đề
 	private int wBoxStuID = 240;// width của box mssv
 	private int wPlan = 120;// width của mã đề
@@ -29,9 +29,9 @@ public class Plantain_StudentID {
 	private boolean Plan = false;// mã đề
 	private boolean StuID_Plantain;
 
-	public Plantain_StudentID(String pathImg, boolean StuID_Plantain) {
+	public Plantain_StudentID(Mat matPathImg, boolean StuID_Plantain) {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		this.pathImg = pathImg;
+		this.matPathImg = matPathImg;
 		this.StuID_Plantain = StuID_Plantain;
 		this.check();
 	}
@@ -49,9 +49,8 @@ public class Plantain_StudentID {
 
 	// images gray
 	public Mat imgGray() {
-		Mat src = Imgcodecs.imread(pathImg);
 		Mat dstImg = new Mat();
-		Imgproc.cvtColor(src, dstImg, Imgproc.COLOR_BGR2GRAY);
+		Imgproc.cvtColor(matPathImg, dstImg, Imgproc.COLOR_BGR2GRAY);
 		Mat dstGray = new Mat(dstImg.rows(), dstImg.cols(), dstImg.type());
 		Imgproc.GaussianBlur(dstImg, dstGray, new Size(3, 3), 0);
 		return dstGray;

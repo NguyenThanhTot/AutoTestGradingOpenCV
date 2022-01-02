@@ -202,17 +202,13 @@ public class GetAnswers {
 
 	public void addAnswer(Map<Integer, Line> output, int line, Rect rectAns) {
 		int x = rectAns.x;
-<<<<<<< HEAD
+
 		// 21 là ô
 		// khoảng cách ô
 		for (int i = 3; i >=0; i--) {
 			if (MARGIN + SPACE_ANSWER * (i - 1) + W_ANSWER * i < x) {
-=======
-		// 21 lĂ  Ă´
-		// khoáº£ng cĂ¡ch Ă´
-		for (int i = 3; i >= 0; i--) {
-			if (21 + SPACE_ANSWER * (i - 1) + W_ANSWER * i < x) {
->>>>>>> b62e3f2b7b6971328c791f1397f2850ec994e011
+
+
 				output.put(line, new Line(line, converNumToTextAns(i)));
 				break;
 			}
