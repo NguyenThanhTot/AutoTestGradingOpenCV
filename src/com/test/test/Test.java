@@ -14,22 +14,26 @@ import com.test.process.Plantain_StudentID;
 
 public class Test {
 
-
 	public static void main(String[] args) {
-		
-		
+
 		Mat testID = new Mat();
 		Mat stdID = new Mat();
 		Mat answers = new Mat();
-		
 
 		String filePath = "src/dapan4.jpg";
 		Mat src = Imgcodecs.imread(filePath);
 
 		GetAnswers getAns = new GetAnswers();
-	
-		Map<Integer, Line> ok = getAns.getAnswers(answers);
 
+		Map<Integer, Line> ok = getAns.getAnswers(answers);
+		String filePath1 = "src/img/img-mssv/rs-ma-so-sv-1.jpg";
+		Mat stuSrc = Imgcodecs.imread(filePath1);
+		Plantain_StudentID stu = new Plantain_StudentID(stuSrc, true);
+		String MSSV = stu.getCodeID();
+		String filePath2 = "src/img/rs-ma-de-11.jpg";
+		Mat planSrc = Imgcodecs.imread(filePath2);
+		Plantain_StudentID plan = new Plantain_StudentID(planSrc, false);
+		String MaDe =plan.getCodeID();
 	}
 
 }
