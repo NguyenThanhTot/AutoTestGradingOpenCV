@@ -61,7 +61,7 @@ public class Plantain_StudentID {
 		Mat imgGrayResize = reSize(imgGray(), wBoxPlan_StuID, hBoxP_StuID);
 		Mat dstThres = new Mat(imgGrayResize.rows(), imgGrayResize.cols(), imgGrayResize.type(), new Scalar(0));
 		Imgproc.adaptiveThreshold(imgGrayResize, dstThres, 255, Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C,
-				Imgproc.THRESH_BINARY_INV, 31, 5);
+				Imgproc.THRESH_BINARY_INV, 31, 11);
 		return dstThres;
 	}
 
@@ -91,7 +91,7 @@ public class Plantain_StudentID {
 			Rect rect = Imgproc.boundingRect(contours.get(i));
 //			System.err.println(rect);
 			if (rect.area() > 280 && rect.area() < 600) {
-				if (((rect.y > 5 && rect.y < 50) || (rect.y > 290 && rect.y < hBoxP_StuID)) && (rect.x < 38)
+				if (((rect.y > 5 && rect.y < 60) || (rect.y > 290 && rect.y < hBoxP_StuID)) && (rect.x < 38)
 						&& (rect.width > 15 && rect.width < 25) && (rect.height > 15 && rect.height < 25)) {
 					rectTree.add(rect);
 				}
@@ -102,14 +102,14 @@ public class Plantain_StudentID {
 	}
 
 	// lấy ra mã đề or MSSV
-	public String code() {
+	public String getCodeID() {
 		List<MatOfPoint> contours = getListContours(imgPlan_StuID(threshold()));
 		Set<Rect> rectTree = new TreeSet<Rect>(SortPlantainY.SORT_PLANTAIN);
 		for (int i = 0; i < contours.size(); i++) {
 			Rect rect = Imgproc.boundingRect(contours.get(i));
 //			System.out.println(rect);
 			if (rect.area() > 250 && rect.area() < 530) {
-				if ((rect.y > 5 && rect.y < hBoxP_StuID) && (rect.x > 0 && rect.x < wPlan_StuID)
+				if ((rect.y > 0 && rect.y < hBoxP_StuID) && (rect.x > 0 && rect.x < wPlan_StuID)
 						&& (rect.width > 13 && rect.width < 27) && (rect.height > 13 && rect.height < 27)) {
 					rectTree.add(rect);
 				}
@@ -129,7 +129,9 @@ public class Plantain_StudentID {
 		int count = 9;
 		int coordinates = 330;
 		while (count != -1) {
+//			System.err.println(coordinates);
 			if (rect.y < coordinates && rect.y > coordinates - 35) {
+				
 				res = String.valueOf(count);
 				break;
 			} else {
@@ -137,6 +139,7 @@ public class Plantain_StudentID {
 				coordinates -= 35;
 				continue;
 			}
+			
 		}
 		return res;
 	}

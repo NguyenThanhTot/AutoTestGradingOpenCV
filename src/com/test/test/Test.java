@@ -61,39 +61,29 @@ public class Test {
 	// test mã đề và MSSV
 	public void runPlantain_StuID() {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		String s1 = "/src/img/stuID-cam1.jpg";
-		Mat m1 = Imgcodecs.imread(s1);
-		String s2 = "/src/img/plan-cam1.jpg";
-		Mat m2 = Imgcodecs.imread(s2);
-		String s3 = "./src/img/stuID-cam.jpg";
-		Mat m3 = Imgcodecs.imread(s3);
-		String s4 = "./src/img/plan-cam.jpg";
-		Mat m4 = Imgcodecs.imread(s4);
-		String s5 = "./src/img/stuID-cam2.jpg";
-		Mat m5 = Imgcodecs.imread(s5);
-		String s6 = "./src/img/plan-cam2.jpg";
-		Mat m6 = Imgcodecs.imread(s6);
-		String s7 = "./src/img/stuID-cam3.jpg";
-		Mat m7 = Imgcodecs.imread(s7);
-		String s8 = "./src/img/plan-cam3.jpg";
-		Mat m8 = Imgcodecs.imread(s8);
-		String s9 = "./src/img/rs-ma-so-sv-1.jpg";
-		Mat m9 = Imgcodecs.imread(s9);
 		String s10 = "./src/img/rs-ma-de-4.jpg";
 		Mat m10 = Imgcodecs.imread(s10);
-		Plantain_StudentID oStu = new Plantain_StudentID(m5, true);
-//	Imgcodecs.imwrite("./src/img/grayStu.jpg", oStu.imgGray());
-//	Imgcodecs.imwrite("./src/img/thresholdStu.jpg", oStu.threshold());
-//	Imgcodecs.imwrite("./src/img/stuID.jpg", oStu.imgPlan_StuID(oStu.threshold()));
-		System.out.println("MSSV : " + oStu.code());
-		// 10,14,19,27,3,32,35,38,5,8
-		Plantain_StudentID oPlan = new Plantain_StudentID(m6, false);
+		for (int i = 1; i <= 46; i++) {
+			if (i != 5 && i != 31 && i != 35) {
+				String s11 = "./src/img/img-mssv/rs-ma-so-sv-" + String.valueOf(i) + ".jpg";
+				Mat m11 = Imgcodecs.imread(s11);
+				Plantain_StudentID oStu3 = new Plantain_StudentID(m11, true);
+//		Imgcodecs.imwrite("./src/img/grayStu.jpg", oStu.imgGray());
+//		Imgcodecs.imwrite("./src/img/thresholdStu.jpg", oStu.threshold());
+//		Imgcodecs.imwrite("./src/img/stuID.jpg", oStu.imgPlan_StuID(oStu.threshold()));
+				System.out.println(i + "MSSV : " + oStu3.getCodeID());
+			} else {
+				continue;
+			}
+
+		}
+		Plantain_StudentID oPlan = new Plantain_StudentID(m10, false);
 //	Imgcodecs.imwrite("./src/img/grayPlan.jpg", oPlan.imgGray());
 //	Imgcodecs.imwrite("./src/img/thresholdPlan.jpg", oPlan.threshold());
 //	Imgcodecs.imwrite("./src/img/plantain.jpg", oPlan.imgPlan_StuID(oPlan.threshold()));
-		System.out.println("Mã Đề : " + oPlan.code());
+		System.out.println("Mã Đề : " + oPlan.getCodeID());
 		// 5,3,8,10,14,19,23,27,32,34,35,37,38
-
+		
 	}
 
 	public static void main(String[] args) {
