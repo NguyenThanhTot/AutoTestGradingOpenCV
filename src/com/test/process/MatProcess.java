@@ -39,6 +39,18 @@ public class MatProcess {
 		cannyOutput.release();
 		return contours;
 	}
+	
+	public static List<MatOfPoint> getContour_1 (Mat src) {
+		Mat cannyOutput = new Mat();
+		Imgproc.Canny(src, cannyOutput, 127, 255); // 80 200
+
+		List<MatOfPoint> contours = new ArrayList<>();// RETR_TREE
+		Mat hierarchy = new Mat();
+		Imgproc.findContours(cannyOutput, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE);
+		hierarchy.release();
+		cannyOutput.release();
+		return contours;
+	}
 
 	public static Mat rotate(Mat src, double angle) {
 		int width = src.width();
